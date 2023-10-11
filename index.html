@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Title</title>
+    <style>
+      body {
+        display: grid;
+        align-items: center;
+        justify-content: center;
+        background-color: #14213d;
+      }
+      input {
+        background-color: #000000;
+        color: white;
+        font-weight: bold;
+        outline: none;
+        border-style: none;
+        border-radius: 10px;
+        transition: box-shadow .2s;
+        text-align: center;
+        font-size: 20px;
+        width: 30%;
+      }
+      h1 {
+        color: #e5e5e5;
+        font-family: "Arial";
+        text-shadow: 0 0 5px black;
+      }
+      h3 {
+        color: #e5e5e5;
+        font-weight: normal;
+        text-shadow: 0 0 5px black;
+      }
+      input:hover {
+        box-shadow: 0 0 20px black;
+      }
+      button {
+        transition: background-color .4s, box-shadow .4s;
+      }
+      button:hover {
+        background-color: white;
+        box-shadow: 0 0 10px white;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div style="background-color: #fca311; padding: 30px; border-radius: 20px; margin-top: 5vw; box-shadow: 0 0 40px black;">
+      <h1 style="text-align: center;">
+        Pace Calculator <h3 style="text-align: center;">
+        (for graesons smooth brain)
+        </h3>
+      </h1>
+      <section style="margin-top: 5vw; display: flex;">
+        <input id="hours" placeholder="Hours" type="number">
+        <a style="font-size: 100px; font-weight: bold;">:</a>
+        <input id="minutes" placeholder="Minutes" type="number">
+        <a style="font-size: 100px; font-weight: bold;">:</a>
+        <input id="seconds" placeholder="Seconds" type="number">
+      </section>
+      <section>
+        <input id="miles" type="number" placeholder="Miles" style="width: 100%; height: 6vw; margin-top: 2vw;">
+      </section>
+    </div>
+    <div style="display: flex; font-size: 40px; text-shadow: 0 0 5px black; font-weight:bold; color: white; background-color: #fca311; padding: 30px; border-radius: 20px; margin-top: 5vw; box-shadow: 0 0 40px black;">
+      <button onclick="calculateAnswer()" style="border-radius:10px;font-weight:bold; width: 100%; height: 5vw; border-style: none;">
+        CALCULATE
+      </button>
+    </div>
+    <div id="visibleBox" style="visibility: hidden; display: flex; font-size: 40px; text-shadow: 0 0 5px black; font-weight:bold; color: white; background-color: #fca311; padding: 30px; border-radius: 20px; margin-top: 5vw; box-shadow: 0 0 40px black;">
+      Answer:
+      <div id="answer" style="margin-left: 10px; padding: 5px; border-radius:10px; background-color: black; ">
+      </div>
+    </div>
+    <script>
+      function calculateAnswer() {
+        var hours = document.getElementById('hours').value
+        var minutes = document.getElementById('minutes').value
+        var seconds = document.getElementById('seconds').value
+        var miles = document.getElementById('miles').value
+        if (hours=="") {
+          hours=0
+        }
+        if (minutes=="") {
+          minutes=0
+        }
+        if (seconds=="") {
+          seconds=0
+        }
+        if (miles=="") {
+          miles=0
+        }
+        if (!(miles==0)) {
+          const answer = (parseInt(hours*60)+parseInt(minutes)+parseInt(seconds/60))/miles
+          const secondsRaw = (answer % 1)
+          const secondsActual = Math.floor(secondsRaw*60)
+          let answerDiv = document.getElementById('answer')
+          answerDiv.innerText = (Math.floor(answer)+" (Minutes) : "+secondsActual+" (Seconds) Per Mile Pace")
+          let visibleBox = document.getElementById('visibleBox')
+          visibleBox.style.visibility = "visible"
+        }
+       }
+    </script>
+  </body>
+</html>
